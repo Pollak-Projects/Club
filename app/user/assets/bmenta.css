@@ -1,0 +1,28 @@
+body{
+    color: rgb(0, 0, 0);
+    background-color: rgb(231, 231, 231);
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+nav {
+    background-color: rgb(26, 142, 255);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+ 
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 71px;
+    align-items: center;
+  }
+ 
+  nav a:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="csapatok.css">
+    <!-- This Code is made by Imii and Gabor -->
+    <script type="text/javascript" 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <title>Tanári felület</title>
+
+</head>
+<body>
+    <div>
+        <form method='POST' action="feldolgoz.php">
+            <h3>Csapat készítés</h3>
+                <form method='POST' action="feldolgoz.php">
+                    Csapat Név <input type="text" name="csoport" id="csoport">
+                    <br>
+                    Csapat Leírás <input type="textarea" name="des" id="des">
+                    <br>
+            <input type="submit">
+        </form>
+    </div>
+<br>
+<br>
+    <h3>Csapat törlés</h3>
+    <form method='POST' action="torles.php">
+    <select name="csoportdel" id="csoporttorol" style="margin-left:20px ;">
+        <option value="-1">Válasszon csapatot!</option>
+    </select>
+    <br>
+    <input type="submit" name="submit" value="Törlés" style="margin-left:150px ;">
+    </form>
+
+    <form action="csapat_csatlakoz.php" method="post">
+    <h3>Csatlakozás csapathoz</h3>
+    <!--Csatlakozás id alapján-->
+    
+
+
+    <select name="csoport-csat" id="csoport-csat" style="margin-left:20px ;">
+        <option value="-1">Válasszon csapatot!</option>
+    </select>
+    <br>
+    <input type="submit" value="Csatlakozás" style="margin-left:150px ;">
+    </form>
+
+
+
+    <h3>Kilépés csapatból</h3>
+    <!--Ha be van jelentkezve id alapján kilépés-->
+
+    <select name="csoport-kilep" id="csoport-kilep" style="margin-left:20px ;">
+        <option value="-1">Válasszon csapatot!</option>
+    </select>
+    <br>
+    <input type="submit" value="Kilépés" style="margin-left:150px ;">
+    </form>
+
+    <script>
+        $(document).ready(function () {		
+            $.ajax( 
+            {
+        url: "backend_csapatnevek.php",
+        type: 'POST',  // http method
+        data: { tableName: 'csapat' },  // data to submit
+                dataType: 'json', // type of response data
+                //timeout: 500,     // timeout milliseconds
+                success: function (data,status,xhr) {   // success callback function
+
+          for(let i = 0; i< data.length;i++){
+           // <option value="1">One</option>
+                    $('#csoporttorol').append('<option value="'+data[i].id + '">' + data[i].Nev + '</option>');
+                    $('#csoport-csat').append('<option value="'+data[i].id + '">' + data[i].Nev + '</option>');
+                    //$('#dolgozok').append('<option value="' +data[i].id + '">' + data[i].Name + '</option>');
+          }
+                },
+                error: function (jqXhr, textStatus, errorMessage) { // error callback 
+                    $('#csoporttorol').append('Error: ' + errorMessage);
+                    console.log(textStatus)
+                }
+            });
+    });
+    
+    </script>
+
+</body>
+
+
+
+</html>
